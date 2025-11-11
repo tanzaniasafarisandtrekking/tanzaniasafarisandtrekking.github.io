@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzania Safaris & Trekking: Digital Launch Checklist</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        :root {
+            --color-primary: #1e8449; /* Deep Safari Green (DONE) */
+            --color-secondary: #f39c12; /* Vibrant Orange/Gold */
+            --color-dark: #2c3e50; /* Dark Navy/Bush */
+            --color-light: #f4f6f7; /* Off-White/Sand */
+            --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.1);
+            
+            /* New Status Colors */
+            --color-done: var(--color-primary);
+            --color-critical: #c0392b; /* Red */
+            --color-waiting: #f1c40f; /* Yellow */
+            --color-pending-bg: #bdc3c7; /* Gray */
+            --color-pending-text: #4a4e52;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        header h1 {
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        header #real-time-clock {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.15); /* Light background for visibility */
+            display: inline-block;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Grid Layout */
+        .roadmap-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Card Styling */
+        .roadmap-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            border-top: 5px solid var(--color-secondary); /* Default fall-back */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            
+            /* NEW FLEX LAYOUT */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .roadmap-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-header .icon-box {
+            background-color: var(--color-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin: 0;
+        }
+
+        /* Task List */
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+            border-top: 1px dashed var(--color-light);
+            padding-top: 15px;
+        }
+
+        .task-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        
+        /* Specific styling for the countdown */
+        #payment-countdown {
+            color: var(--color-critical);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .task-list li strong {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .task-list li::before {
+            content: "\2022";
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            line-height: 0.5;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        /* Completion Status Indicator (BIG BUTTON STYLE) */
+        .completion-status {
+            margin-top: auto;
+            align-self: center;
+            width: fit-content;
+            
+            /* Button Style */
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* STATUS CLASSES - DEFINING COLORS */
+        .roadmap-card.status-critical { border-top-color: var(--color-critical); }
+        .roadmap-card.status-critical .completion-status { background-color: var(--color-critical); color: white; box-shadow: 0 4px 6px rgba(192, 57, 43, 0.4); }
+
+        .roadmap-card.status-waiting { border-top-color: var(--color-waiting); }
+        .roadmap-card.status-waiting .completion-status { background-color: var(--color-waiting); color: var(--color-dark); box-shadow: 0 4px 6px rgba(241, 196, 15, 0.4); }
+
+        .roadmap-card.status-pending { border-top-color: var(--color-pending-bg); }
+        .roadmap-card.status-pending .completion-status { background-color: var(--color-pending-bg); color: var(--color-pending-text); }
+
+        .roadmap-card.completed { border-top-color: var(--color-done); opacity: 1; }
+        .roadmap-card.completed .completion-status { background-color: var(--color-done); color: white; box-shadow: 0 4px 6px rgba(30, 132, 73, 0.4); }
+
+        /* Social Media Icons */
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--color-light);
+            margin-top: 10px;
+        }
+
+        .social-icons ion-icon {
+            font-size: 2rem;
+            color: var(--color-dark);
+            transition: color 0.2s ease;
+        }
+
+        .social-icons ion-icon:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .roadmap-grid {
+                width: 95%;
+                gap: 20px;
+            }
+            .card-header h2 {
+                font-size: 1.1rem;
+            }
+            .completion-status {
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tanzania Safaris & Trekking Digital Checklist</h1>
+        <p>Click on any phase to mark it as complete, or toggle back to its current status.</p>
+        <div id="real-time-clock"></div>
+    </header>
+
+    <div class="roadmap-grid">
+
+        <!-- Phase 1: Foundation (CRITICAL - Payment Due) -->
+        <div 
+            class="roadmap-card status-critical" 
+            data-initial-status="status-critical" 
+            data-initial-text="ONGOING: PAYMENT DUE"
+        >
+            <div class="card-header">
+                <div class="icon-box">
+                    <ion-icon name="server-outline"></ion-icon>
+                </div>
+                <h2>Phase 1: Foundation & Infrastructure</h2>
+            </div>
+            <p>Establishing the essential technical backbone.</p>
+            <ul class="task-list">
+                <li><strong>Server & Domain Secured:</strong> Hosting environment is active.</li>
+                <li><strong>Business Email (info@tanzaniasafarisandtrekking.com) Active:</strong> Ready for professional communication.</li>
+                <li>Trial Monitoring: **Payment Due In <span id="payment-countdown">--</span>**</li>
+            </ul>
+            <span class="completion-status" data-status-text>ONGOING: PAYMENT DUE</span>
+        </div>
+
+        <!-- Phase 2: Local Presence (WAITING - Verification) -->
+        <div 
+            class="roadmap-card status-waiting" 
+            data-initial-status="status-waiting" 
+            data-initial-text="WAITING: GMB VERIFICATION"
+        >
+            <div class="card-header">
+                <div class="icon-box">
+                    <ion-icon name="location-outline"></ion-icon>
+                </div>
+                <h2>Phase 2: Local Verification (Google My Business)</h2>
+            </div>
+            <p>Securing local search visibility while verification is pending.</p>
+            <ul class="task-list">
+                <li>**Verification (Pending):** GMB Page submitted.</li>
+                <li>Content Preparation: Gather high-quality photos.</li>
+                <li>Review Strategy: Plan how to solicit first reviews.</li>
+            </ul>
+            <span class="completion-status" data-status-text>WAITING: GMB VERIFICATION</span>
+        </div>
+
+        <!-- Phase 3: Social Media Network (PENDING) -->
+        <div 
+            class="roadmap-card status-pending" 
+            data-initial-status="status-pending" 
+            data-initial-text="PENDING: NOT STARTED"
+        >
+            <div class="card-header">
+                <div class="icon-box">
+                    <ion-icon name="people-circle-outline"></ion-icon>
+                </div>
+                <h2>Phase 3: Social Media & Travel Platforms</h2>
+            </div>
+            <p>Building a brand voice across key communication channels.</p>
+            <ul class="task-list">
+                <li>Platform Creation: Set up all profiles.</li>
+                <li>Review Site: Establish presence on TripAdvisor.</li>
+                <li>Content Calendar: Plan a consistent posting schedule.</li>
+            </ul>
+            <div class="social-icons">
+                <ion-icon name="logo-instagram" title="Instagram"></ion-icon>
+                <ion-icon name="logo-youtube" title="YouTube"></ion-icon>
+                <ion-icon name="logo-facebook" title="Facebook"></ion-icon>
+                <ion-icon name="logo-tiktok" title="TikTok"></ion-icon>
+                <ion-icon name="logo-linkedin" title="LinkedIn"></ion-icon>
+                <ion-icon name="logo-google" title="TripAdvisor (Using Google icon as substitute)"></ion-icon>
+            </div>
+            <span class="completion-status" data-status-text>PENDING: NOT STARTED</span>
+        </div>
+
+        <!-- Phase 4: Website Development & Launch (PENDING) -->
+        <div 
+            class="roadmap-card status-pending" 
+            data-initial-status="status-pending" 
+            data-initial-text="PENDING: NOT STARTED"
+        >
+            <div class="card-header">
+                <div class="icon-box">
+                    <ion-icon name="laptop-outline"></ion-icon>
+                </div>
+                <h2>Phase 4: Website Development, Testing & Deploy</h2>
+            </div>
+            <p>The core hub for bookings, information, and brand trust.</p>
+            <ul class="task-list">
+                <li>Content Integration: Add tour packages and pricing.</li>
+                <li>Functionality Testing: Test booking forms and responsiveness.</li>
+                <li>Go Live: Final deployment to the secured domain.</li>
+            </ul>
+            <span class="completion-status" data-status-text>PENDING: NOT STARTED</span>
+        </div>
+
+        <!-- Phase 5: Growth & Optimization (PENDING) -->
+        <div 
+            class="roadmap-card status-pending" 
+            data-initial-status="status-pending" 
+            data-initial-text="PENDING: NOT STARTED"
+        >
+            <div class="card-header">
+                <div class="icon-box">
+                    <ion-icon name="trending-up-outline"></ion-icon>
+                </div>
+                <h2>Phase 5: Search Engine Optimization (SEO)</h2>
+            </div>
+            <p>Driving organic traffic and maximizing visibility (Optional Step).</p>
+            <ul class="task-list">
+                <li>Keyword Strategy: Define target keywords.</li>
+                <li>On-Page Optimization: Optimize titles and descriptions.</li>
+                <li>Monitoring: Implement analytics tools to track performance.</li>
+            </ul>
+            <span class="completion-status" data-status-text>PENDING: NOT STARTED</span>
+        </div>
+
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.roadmap-card');
+
+            // --- Status Toggle Logic ---
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const statusTextElement = card.querySelector('[data-status-text]');
+                    
+                    if (card.classList.contains('completed')) {
+                        // Revert to original state
+                        const initialStatusClass = card.getAttribute('data-initial-status');
+                        const initialStatusText = card.getAttribute('data-initial-text');
+                        
+                        card.classList.remove('completed');
+                        card.classList.add(initialStatusClass);
+                        if (statusTextElement) {
+                            statusTextElement.textContent = initialStatusText;
+                        }
+                        // Re-run countdown on revert for Phase 1
+                        if (card.getAttribute('data-initial-status') === 'status-critical') {
+                            updateCountdown();
+                        }
+
+                    } else {
+                        // Mark as COMPLETED
+                        const initialStatusClass = card.getAttribute('data-initial-status');
+
+                        card.classList.remove(initialStatusClass);
+                        
+                        card.classList.add('completed');
+                        if (statusTextElement) {
+                            statusTextElement.textContent = 'COMPLETED';
+                        }
+                        // Stop countdown display on completion for Phase 1
+                        if (card.querySelector('#payment-countdown')) {
+                            document.getElementById('payment-countdown').textContent = 'Paid!';
+                            document.getElementById('payment-countdown').style.color = 'var(--color-done)';
+                        }
+                    }
+                });
+            });
+
+            // --- Clock Functionality ---
+            function updateClock() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                const clockElement = document.getElementById('real-time-clock');
+                if (clockElement) {
+                    clockElement.textContent = now.toLocaleDateString('en-US', options);
+                }
+            }
+
+            // --- Countdown Functionality (Deadline: Dec 7, 2025) ---
+            function updateCountdown() {
+                // Deadline is 26 days from the simulated start date (Nov 11, 2025)
+                const deadline = new Date('2025-12-07T00:00:00'); 
+                const now = new Date();
+                const timeRemaining = deadline - now;
+                const countdownElement = document.getElementById('payment-countdown');
+                const phase1Card = countdownElement ? countdownElement.closest('.roadmap-card') : null;
+
+                if (!countdownElement || (phase1Card && phase1Card.classList.contains('completed'))) {
+                    return; // Stop if completed
+                }
+
+                if (timeRemaining > 0) {
+                    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                    
+                    countdownElement.textContent = `${days} Days, ${hours} Hours, ${minutes} Mins`;
+                    
+                } else {
+                    // Past Due
+                    countdownElement.textContent = 'PAST DUE!';
+                    if (phase1Card) {
+                        phase1Card.classList.remove('status-critical');
+                        phase1Card.classList.add('status-critical'); // Keep it red
+                        const statusBtn = phase1Card.querySelector('[data-status-text]');
+                        if (statusBtn) statusBtn.textContent = 'CRITICAL: PAST DUE';
+                    }
+                }
+            }
+
+            updateClock();
+            updateCountdown();
+            setInterval(updateClock, 1000); // Update clock every second
+            setInterval(updateCountdown, 1000); // Update countdown every second for precision
+        });
+    </script>
+
+</body>
+</html>
