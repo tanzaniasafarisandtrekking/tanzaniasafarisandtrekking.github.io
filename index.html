@@ -205,11 +205,14 @@
 
         .social-icons ion-icon {
             font-size: 2rem;
-            color: var(--color-dark);
             transition: color 0.2s ease;
         }
 
         .social-icons ion-icon:hover {
+            color: var(--color-secondary);
+        }
+
+        .social-icons .done {
             color: var(--color-secondary);
         }
 
@@ -262,7 +265,7 @@
 
         <!-- Phase 2: Local Presence (WAITING - Verification) -->
         <div 
-            class="roadmap-card status-waiting" 
+            class="roadmap-card completed" 
             data-initial-status="status-waiting" 
             data-initial-text="WAITING: GMB VERIFICATION"
         >
@@ -274,16 +277,17 @@
             </div>
             <p>Securing local search visibility while verification is pending.</p>
             <ul class="task-list">
-                <li>Verification (Pending): GMB Page submitted.</li>
-                <li>Content Preparation: Gather high-quality photos.</li>
-                <li>Review Strategy: Plan how to solicit first reviews.</li>
+                <li>1. Verification (Done): GMB Page submitted.</li>
+                <li>2. Photos Done</li>
+                <li>3. Suggestions: Ads***</li>
             </ul>
-            <span class="completion-status" data-status-text>PENDING PICTURES</span>
+            <span class="completion-status" data-status-text>COMPLETED</span>
+            
         </div>
 
         <!-- Phase 3: Social Media Network (PENDING) -->
         <div 
-            class="roadmap-card status-pending" 
+            class="roadmap-card status-waiting" 
             data-initial-status="status-pending" 
             data-initial-text="PENDING: NOT STARTED"
         >
@@ -300,15 +304,15 @@
                 <li>Content Calendar: Plan a consistent posting schedule.</li>
             </ul>
             <div class="social-icons">
-                <ion-icon name="logo-instagram" title="Instagram"></ion-icon>
-                <ion-icon name="logo-youtube" title="YouTube"></ion-icon>
-                <ion-icon name="logo-facebook" title="Facebook"></ion-icon>
-                <ion-icon name="logo-tiktok" title="TikTok"></ion-icon>
-                <ion-icon name="logo-linkedin" title="LinkedIn"></ion-icon>
-                <ion-icon name="logo-whatsapp"></ion-icon>
-                <ion-icon name="star-half-outline" title="TripAdvisor (Using Google icon as substitute)"></ion-icon>
+               <a class="done" href="https://www.instagram.com/tanzaniasafarisandtrekking/"><ion-icon name="logo-instagram" title="Instagram"></ion-icon></a>
+               <a class="done" href="https://www.youtube.com/@tanzaniasafarisandtrekking"><ion-icon name="logo-youtube" title="YouTube"></ion-icon></a>
+               <a  href="#"><ion-icon name="logo-facebook" title="Facebook"></ion-icon></a>
+               <a  href="#"><ion-icon name="logo-tiktok" title="TikTok"></ion-icon></a>
+               <a class="done" href="https://www.linkedin.com/in/tanzaniasafarisandtrekking/"><ion-icon name="logo-linkedin" title="LinkedIn"></ion-icon></a>
+               <a  href="#"><ion-icon name="logo-whatsapp"></ion-icon></a>
+               <a class="done" href="https://www.tripadvisor.com/Attraction_Review-g317084-d34020216-Reviews-Tanzania_Safaris_And_Trekking-Moshi_Kilimanjaro_Region.html"><ion-icon name="star-half-outline" title="TripAdvisor"></ion-icon></a>
             </div>
-            <span class="completion-status" data-status-text>PENDING: NOT STARTED</span>
+            <span class="completion-status" data-status-text>IN PROGRESS</span>
         </div>
 
         <!-- Phase 4: Website Development & Launch (PENDING) -->
